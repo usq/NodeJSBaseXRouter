@@ -1,0 +1,27 @@
+21:27:47.991	SERVER	admin	OK	Server was started (port: 1984).
+21:27:48.038	SERVER	admin	OK	HTTP Server was started (port: 8984).
+21:28:51.814	127.0.0.1:63981	admin	REQUEST	[POST] http://localhost:8984/postmessage
+21:28:52.798	127.0.0.1:63981	admin	302		991.09 ms
+21:28:52.798	127.0.0.1:63981	admin	200		0.16 ms
+21:28:52.816	127.0.0.1:63982	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+21:28:52.829	127.0.0.1:63982	admin	200		13.69 ms
+21:29:50.827	127.0.0.1:63996	admin	REQUEST	[POST] http://localhost:8984/postmessage
+21:29:50.881	127.0.0.1:63996	admin	302		54.47 ms
+21:29:50.881	127.0.0.1:63996	admin	200		0.11 ms
+21:29:50.890	127.0.0.1:63997	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+21:29:50.895	127.0.0.1:63997	admin	200		5.15 ms
+21:31:18.537	127.0.0.1:64019	admin	REQUEST	[POST] http://localhost:8984/postmessage
+21:31:18.599	127.0.0.1:64019	admin	302		62.54 ms
+21:31:18.599	127.0.0.1:64019	admin	200		0.14 ms
+21:31:18.615	127.0.0.1:64020	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+21:31:18.619	127.0.0.1:64020	admin	200		4.2 ms
+21:31:55.684	127.0.0.1:64024	admin	REQUEST	[POST] http://localhost:8984/postmessage
+21:31:55.733	127.0.0.1:64024	admin	302		49.59 ms
+21:31:55.734	127.0.0.1:64024	admin	200		0.26 ms
+21:31:55.743	127.0.0.1:64025	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+21:31:55.747	127.0.0.1:64025	admin	200		4.25 ms
+21:33:30.059	127.0.0.1:64040	admin	REQUEST	[POST] http://localhost:8984/postmessage
+21:33:30.112	127.0.0.1:64040	admin	302		54.0 ms
+21:33:30.112	127.0.0.1:64040	admin	200		0.12 ms
+21:33:30.117	127.0.0.1:64041	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+21:33:30.124	127.0.0.1:64041	admin	200		7.13 ms

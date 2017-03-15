@@ -1,0 +1,18 @@
+15:38:55.340	SERVER	admin	OK	Server was started (port: 1984).
+15:38:55.383	SERVER	admin	OK	HTTP Server was started (port: 8984).
+15:39:16.857	0:0:0:0:0:0:0:1:63187	admin	REQUEST	[GET] http://localhost:8984/
+15:39:17.643	0:0:0:0:0:0:0:1:63187	admin	200		789.4 ms
+15:39:17.728	0:0:0:0:0:0:0:1:63189	admin	REQUEST	[GET] http://localhost:8984/favicon.ico
+15:39:17.729	0:0:0:0:0:0:0:1:63189	admin	404	No function found that matches the request.	1.25 ms
+15:39:24.196	0:0:0:0:0:0:0:1:63187	admin	401	Basic authentication expected.	103.31 ms
+15:39:26.571	0:0:0:0:0:0:0:1:63187	admin	401	Basic authentication expected.	207.14 ms
+15:39:39.972	0:0:0:0:0:0:0:1:63187	admin	REQUEST	[POST] http://localhost:8984/form
+15:39:40.006	0:0:0:0:0:0:0:1:63187	admin	200		34.22 ms
+21:49:49.015	SERVER	admin	OK	HTTP Server was stopped (port: 8984).
+21:49:49.015	SERVER	admin	OK	Server was stopped (port: 1984).
+21:49:53.242	SERVER	admin	OK	Server was started (port: 1984).
+21:49:53.285	SERVER	admin	OK	HTTP Server was started (port: 8984).
+21:50:10.154	0:0:0:0:0:0:0:1:49165	admin	REQUEST	[GET] http://localhost:8984/webs
+21:50:11.056	0:0:0:0:0:0:0:1:49165	admin	200		905.16 ms
+21:50:42.665	127.0.0.1:49170	admin	REQUEST	[GET] http://localhost:8984/webs
+21:50:42.709	127.0.0.1:49170	admin	200		43.52 ms

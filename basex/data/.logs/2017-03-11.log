@@ -1,0 +1,21 @@
+16:59:38.439	SERVER	admin	OK	Server was started (port: 1984).
+16:59:38.517	SERVER	admin	OK	HTTP Server was started (port: 8984).
+22:42:11.211	127.0.0.1:55028	admin	REQUEST	[POST] http://localhost:8984/
+22:42:12.125	127.0.0.1:55028	admin	404	No function found that matches the request.	920.58 ms
+22:43:29.768	127.0.0.1:56287	admin	REQUEST	[POST] http://localhost:8984/
+22:43:29.791	127.0.0.1:56287	admin	404	No function found that matches the request.	22.44 ms
+22:45:12.482	127.0.0.1:57931	admin	REQUEST	[POST] http://localhost:8984/postmessage
+22:45:12.626	127.0.0.1:57931	admin	302		144.09 ms
+22:45:12.626	127.0.0.1:57931	admin	200		0.19 ms
+22:45:12.637	127.0.0.1:57948	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+22:45:12.646	127.0.0.1:57948	admin	200		8.87 ms
+22:48:54.981	127.0.0.1:61712	admin	REQUEST	[POST] http://localhost:8984/postmessage
+22:48:55.019	127.0.0.1:61712	admin	302		37.91 ms
+22:48:55.019	127.0.0.1:61712	admin	200		0.18 ms
+22:48:55.029	127.0.0.1:61729	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+22:48:55.034	127.0.0.1:61729	admin	200		5.09 ms
+22:51:44.231	127.0.0.1:64604	admin	REQUEST	[POST] http://localhost:8984/postmessage
+22:51:44.254	127.0.0.1:64604	admin	302		22.81 ms
+22:51:44.254	127.0.0.1:64604	admin	200		0.16 ms
+22:51:44.281	127.0.0.1:64605	admin	REQUEST	[GET] http://localhost:8984/showlastdb
+22:51:44.286	127.0.0.1:64605	admin	200		5.6 ms

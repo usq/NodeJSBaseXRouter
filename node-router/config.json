@@ -1,0 +1,7 @@
+{
+    "router_http_port" : 8081,
+    "router_websocket_port":8080,
+    "basex_host" : "http://localhost",
+    "basex_port" : 8984,
+    "cors" : "*"
+}
