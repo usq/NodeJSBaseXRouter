@@ -1,20 +1,23 @@
 
 $(document).ready(function() {
     
-    var gateway = new Endpoint()
-    gateway.start(undefined, function(response){
-	response.transform("transformation.xsl", function(transformedResp){
-	    console.log("websocket response")
-	    $("#response").append(transformedResp.raw)
-	})
-	
+    var endpoint = new Endpoint()
+    
+    endpoint.start(undefined, function(response){
+		response.transform("transformation.xsl", function(transformedResp){
+	    	$("#response").append(transformedResp.raw)
+		});
     });
 
     function sendResponseText() {
 	var text = $("#responsemessage").val()
-	gateway.POST("http://localhost:8081/postmessage", {message: text, clientid:1}, function(serverresponse){
-	    console.log("HHEEEERE")
-	    console.log(serverresponse)
+
+	endpoint.POST("http://localhost:8081/postmessage", {message: text, clientid:1}, function(serverresponse){
+		
+	    serverresponse.transform("transformation.xsl", function(transformedResp){
+		console.log("response to my post")
+		$("#response").append(transformedResp.raw)
+	    })	    
 	});
     }
     

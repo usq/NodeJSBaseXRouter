@@ -12,8 +12,12 @@ var path = require('path');
 var configPath = path.join(__dirname, 'config.json');
 
 var config = JSON.parse(fs.readFileSync(configPath));
+console.log(configPath)
+
+console.log(config)
+
 function basexHost() {
-    return config.basex_address + ":" + config.basex_port
+    return config.basex_host + ":" + config.basex_port
 }
 
 var bodyParser = require('body-parser')
