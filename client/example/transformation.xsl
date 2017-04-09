@@ -4,11 +4,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:template match="/">
     <div>
-  <xsl:for-each select="databases/post">
-    <p><xsl:value-of select="message" /></p>
-    <hl/>
-  </xsl:for-each>
+      <xsl:for-each select="response">
+	<p style="color: green;"><xsl:value-of select="title" /></p>
+	<p style="color: red;"><xsl:value-of select="time" /></p>
+	<hl/>
+      </xsl:for-each>
     </div>
-</xsl:template>
+  </xsl:template>
 
 </xsl:stylesheet>

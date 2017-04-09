@@ -1,43 +1,36 @@
 
 $(document).ready(function() {
     
+    var config = {router_host : "localhost",router_ws_port: 8887};
     var endpoint = new Endpoint()
     
-    endpoint.start(undefined, function(response){
+    endpoint.start(config, function(response){
+
 		response.transform("transformation.xsl", function(transformedResp){
-	    	$("#response").append(transformedResp.raw)
+
+	    	var responseField = $('#response');
+	    	responseField.append(transformedResp.raw)
+	    	responseField.scrollTop(responseField[0].scrollHeight);
 		});
     });
 
     function sendResponseText() {
-	var text = $("#responsemessage").val()
-
-	endpoint.POST("http://localhost:8081/postmessage", {message: text, clientid:1}, function(serverresponse){
-		
-	    serverresponse.transform("transformation.xsl", function(transformedResp){
-		console.log("response to my post")
-		$("#response").append(transformedResp.raw)
-	    })	    
-	});
+		var text = $("#responsemessage").val()
+		endpoint.POST("http://localhost:8081/postmessage", {message: text, clientid:1});
     }
     
     $('#sendbutton').click(function() {
-	console.log("here")
-	sendResponseText()
-
-    });
-
-    $('#resetbutton').click(function() {
-	$.get("http://localhost:8081/initdb")
+		sendResponseText()
     });
 
     $("#responsemessage").keyup(function (e) {
-	if (e.keyCode == 13) { // 13 = enter
-	    sendResponseText()
-	    $("#responsemessage").val("") //clear after sending message
-	}
+		if (e.keyCode == 13) { // 13 = enter
+		    sendResponseText()
+	    	$("#responsemessage").val("") //clear after sending message
+		}
     });
-    
+
+    $('#resetbutton').click(function() {
+		$.get("http://localhost:8081/initdb")
+    });
 });
-
-

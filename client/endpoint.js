@@ -29,7 +29,7 @@ function Endpoint() {
     return {
 	configuration : {
 	    router_host : "localhost",
-	    router_ws_port: 8887
+	    router_ws_port: 8080
 	},
 	__callbacks: {},
 	callback: undefined,

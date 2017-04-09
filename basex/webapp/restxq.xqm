@@ -31,9 +31,9 @@ declare
 	{
 			let $x := 1
 			return (
-							db:create("chat_db", 'webapp/static/emptydb.xml'),
-							db:output(web:redirect("/createddb"))
-							)
+			db:create("chat_db", "static/emptydb.xml"),
+			db:output(web:redirect("/createddb"))
+			)
 };
 
 declare

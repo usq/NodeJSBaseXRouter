@@ -94,10 +94,10 @@ function get(path, callback) {
     var fullPath = basexHost() + path
     console.log("get request to " + fullPath)
     request.get(fullPath, function (error, response, body){
-	console.log("got answer from basex ")
-	console.log(error)
-	console.log(body)
-	callback(body)
+		console.log("got answer from basex ")
+		console.log(error)
+		console.log(body)
+		callback(body)
     });
 }
 

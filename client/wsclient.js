@@ -34,6 +34,7 @@
                     .bind('close', settings.close)
                     .bind('message', settings.message)
                     .bind('message', function(e) {
+			
                         var m = JSON.parse(e.originalEvent.data);
                         var h = settings.events[m.type];
                         if (h) h.call(this, m);
