@@ -7,7 +7,7 @@ app.use(cors())
 app.options('*', cors())
 
 // Define the port to run on
-app.set('port', 7000);
+app.set('port', 7001);
 app.use(express.static('.'));
 
 // Listen for requests
