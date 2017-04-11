@@ -90,7 +90,7 @@ server.post('*', function(req, res) {
 
 
 function get(path, callback) {
-    if (path.indexOf("favicon") != -1) { return callback("") }
+    //if (path.indexOf("favicon") != -1) { return callback("") }
     var fullPath = basexHost() + path
     console.log("get request to " + fullPath)
     request.get(fullPath, function (error, response, body){
