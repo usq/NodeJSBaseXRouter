@@ -9,17 +9,15 @@ declare
 	%rest:path("/postmessage")
 	%rest:POST
 	%rest:form-param("message","{$message}")
-	%rest:form-param("clientid","{$clientid}")	
 	function page:messagepost(
-		$message as xs:string,
-		$clientid as xs:string
+		$message as xs:string
 		)
 {
-		let $entry := <post><message>{$message}</message><client>{$clientid}</client></post>
+		let $entry := <post><message>{$message}</message></post>
 		let $db := db:open("chat_db")
 		return (
 			db:output(web:redirect("/showlastdb")),
-			insert node $entry as last into $db/databases
+							insert node $entry as last into $db/databases
 	)
 };
 
@@ -31,10 +29,12 @@ declare
 	{
 			let $x := 1
 			return (
-			db:create("chat_db", "static/emptydb.xml"),
+			db:create("chat_db", <databases></databases>, "chatdb"),
 			db:output(web:redirect("/createddb"))
 			)
 };
+
+
 
 declare
 	%rest:path("/createddb")
@@ -44,7 +44,7 @@ declare
   %output:doctype-public("HTML")
 	function page:createddb() as element(html)
 	{
-	<html><h1>created dbs</h1></html>
+		<html><h1>created dbs</h1></html>
 
 };
 
