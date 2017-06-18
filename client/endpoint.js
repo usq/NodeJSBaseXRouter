@@ -1,15 +1,28 @@
 var __domParser = new DOMParser();
 
+
+function createResponseFromXML(xmlDocument) {
+    var serialized = new XMLSerializer().serializeToString(xmlDocument);
+    return new Response({xml: serialized });
+}
+
 function Response(fromResponse) {
     this.raw = fromResponse.xml;
     this.domNode = __domParser.parseFromString(fromResponse.xml, "application/xml")
 
     var that = this
-    this.transform = function(stylesheetURL, callback) {
 
+    this.transform = function(stylesheetURL, params, callback) {
+	console.log("requresting url " + stylesheetURL)
 	$.get(stylesheetURL, function(resp, other){
 	    xsltProcessor = new XSLTProcessor();
 	    xsltProcessor.importStylesheet(resp);
+
+	    for (k in params) {
+		console.log("setting " + k + " to " + params[k])
+		xsltProcessor.setParameter(null, k, params[k]);
+	    }
+	    
 	    resultDocument = xsltProcessor.transformToFragment(that.domNode, document);
 	    var serialized = new XMLSerializer().serializeToString(resultDocument);
 
@@ -26,6 +39,7 @@ function randomId() {
 }
 
 function Endpoint() {
+
     return {
 	configuration : {
 	    router_host : "localhost",
@@ -33,7 +47,8 @@ function Endpoint() {
 	},
 	__callbacks: {},
 	callback: undefined,
-	start : function(config, callback) {
+	start : function(config, messagesToSubscribe, callback) {
+
 	    //configuration handling
 	    if (config !== undefined) {
 		if (config.router_host !== undefined && config.router_host.length > 0) {
@@ -47,11 +62,13 @@ function Endpoint() {
 
 	    //open the websocket
 	    var that = this
+	    document["__endpoint"] = this	    
 	    var ws = $.websocket("ws://" + this.configuration.router_host
 				 + ":" + this.configuration.router_ws_port + "/",
 				 {
 				     open: function() {
 					 console.log("connected websocket")
+					 this.send("subscribe", messagesToSubscribe)
 				     },
 				     events: {
 					 //default answer
@@ -79,6 +96,15 @@ function Endpoint() {
 		}		
 	    });
 	},
+	GETXML: function(url, callback) {
+	    $.get(url, function(resp, other) {
+		if(callback != undefined) {
+		    console.log(resp)
+		    var response = createResponseFromXML(resp)
+		    callback(response)
+		}		
+	    });
+	},
 	PUT: function(url, data, callback) {
 	    var wrappedMessage = { 'payload': data }
 	    $.ajax({
@@ -94,12 +120,11 @@ function Endpoint() {
 		}
 	    });
 	},
-	POST: function(url, data, callback) {
+	POST: function(url, data, channel, callback) {
 	    console.log("got post to " + url)
 	    var randomID = randomId()
-	    console.log("create random id: " + randomID)
 	    this.__callbacks[randomID] = callback
-	    var wrappedMessage = { 'payload': data, 'rid': randomID}
+	    var wrappedMessage = { 'payload': data, 'rid': randomID, "channel": channel}
     	    $.ajax({
 		type: 'POST',
 		url: url,
@@ -110,7 +135,11 @@ function Endpoint() {
 		    if(callback != undefined) {
 			callback(data)
 		    }
-		}
+		},
+		error: function (responseData, textStatus, errorThrown) {
+		    console.log(responseData)
+		    console.log(textStatus)
+		 }
 	    });	    
 	},
 	DELETE: function(url, callback) {
