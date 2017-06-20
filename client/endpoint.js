@@ -13,19 +13,17 @@ function Response(fromResponse) {
     var that = this
 
     this.transform = function(stylesheetURL, params, callback) {
-	console.log("requresting url " + stylesheetURL)
+	console.log("requresting stylesheet url " + stylesheetURL)
 	$.get(stylesheetURL, function(resp, other){
 	    xsltProcessor = new XSLTProcessor();
 	    xsltProcessor.importStylesheet(resp);
 
 	    for (k in params) {
-		console.log("setting " + k + " to " + params[k])
-		xsltProcessor.setParameter(null, k, params[k]);
+	    	xsltProcessor.setParameter(null, k, params[k]);
 	    }
 	    
 	    resultDocument = xsltProcessor.transformToFragment(that.domNode, document);
 	    var serialized = new XMLSerializer().serializeToString(resultDocument);
-
 	    callback(new Response({xml: serialized}))
 	});
     }
@@ -42,8 +40,8 @@ function Endpoint() {
 
     return {
 	configuration : {
-	    router_host : "localhost",
-	    router_ws_port: 8080
+	    host : "localhost",
+	    ws_port: 8080
 	},
 	__callbacks: {},
 	callback: undefined,
@@ -51,11 +49,11 @@ function Endpoint() {
 
 	    //configuration handling
 	    if (config !== undefined) {
-		if (config.router_host !== undefined && config.router_host.length > 0) {
-		    this.configuration.router_host = config.router_host
+		if (config.host !== undefined && config.host.length > 0) {
+		    this.configuration.host = config.host
 		}
-		if (config.router_ws_port !== undefined && config.router_ws_port > 0) {
-		    this.configuration.router_ws_port = config.router_ws_port
+		if (config.ws_port !== undefined && config.ws_port > 0) {
+		    this.configuration.ws_port = config.ws_port
 		}
 	    }
 	    this.callback = callback;
@@ -63,8 +61,8 @@ function Endpoint() {
 	    //open the websocket
 	    var that = this
 	    document["__endpoint"] = this	    
-	    var ws = $.websocket("ws://" + this.configuration.router_host
-				 + ":" + this.configuration.router_ws_port + "/",
+	    var ws = $.websocket("ws://" + this.configuration.host
+				 + ":" + this.configuration.ws_port + "/ws",
 				 {
 				     open: function() {
 					 console.log("connected websocket")
@@ -124,19 +122,31 @@ function Endpoint() {
 	    console.log("got post to " + url)
 	    var randomID = randomId()
 	    this.__callbacks[randomID] = callback
-	    var wrappedMessage = { 'payload': data, 'rid': randomID, "channel": channel}
+	    
+	    
+	    var urlEncodedData = "";
+	    var urlEncodedDataPairs = [];
+
+	    for(name in data) {
+	      urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+	    }
+
+	    urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+
+	    console.log(urlEncodedData)
     	    $.ajax({
-		type: 'POST',
-		url: url,
-		data: JSON.stringify (wrappedMessage),
-		contentType: "application/json",
-		dataType: 'json',
-		success: function(data) {
-		    if(callback != undefined) {
-			callback(data)
-		    }
+    	    	type: 'POST',
+    	    	url: url,
+    	    	data: urlEncodedData,
+    	    	contentType: "application/x-www-form-urlencoded",
+    	    	success: function(data) {
+    	    		if(callback != undefined) {
+    	    			console.log("data")
+    	    			callback(data)
+    	    		}
 		},
 		error: function (responseData, textStatus, errorThrown) {
+			console.log("error")
 		    console.log(responseData)
 		    console.log(textStatus)
 		 }
