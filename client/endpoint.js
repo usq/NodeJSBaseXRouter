@@ -42,8 +42,8 @@ function Endpoint() {
 
     return {
 	configuration : {
-	    router_host : "localhost",
-	    router_ws_port: 8080
+	    host : "localhost",
+	    ws_port: 8080
 	},
 	__callbacks: {},
 	callback: undefined,
@@ -51,11 +51,11 @@ function Endpoint() {
 
 	    //configuration handling
 	    if (config !== undefined) {
-		if (config.router_host !== undefined && config.router_host.length > 0) {
-		    this.configuration.router_host = config.router_host
+		if (config.host !== undefined && config.host.length > 0) {
+		    this.configuration.host = config.host
 		}
-		if (config.router_ws_port !== undefined && config.router_ws_port > 0) {
-		    this.configuration.router_ws_port = config.router_ws_port
+		if (config.ws_port !== undefined && config.ws_port > 0) {
+		    this.configuration.ws_port = config.ws_port
 		}
 	    }
 	    this.callback = callback;
@@ -63,8 +63,8 @@ function Endpoint() {
 	    //open the websocket
 	    var that = this
 	    document["__endpoint"] = this	    
-	    var ws = $.websocket("ws://" + this.configuration.router_host
-				 + ":" + this.configuration.router_ws_port + "/",
+	    var ws = $.websocket("ws://" + this.configuration.host
+				 + ":" + this.configuration.ws_port + "/",
 				 {
 				     open: function() {
 					 console.log("connected websocket")
