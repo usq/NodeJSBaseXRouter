@@ -1,0 +1,3 @@
+[submodule "Endpoint"]
+	path = Endpoint
+	url = https://github.com/usq/Endpoint.git
